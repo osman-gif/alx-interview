@@ -1,10 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 
 import sys
 
 
 def print_stats(size, status):
+    """Prints the stats"""
+
     print("File size: {}".format(size))
     for key in sorted(status.keys()):
         if status[key]:
@@ -12,6 +14,7 @@ def print_stats(size, status):
 
 
 def main():
+    """Main function"""
     size = 0
     status = {"200": 0, "301": 0, "400": 0, "401": 0,
               "403": 0, "404": 0, "405": 0, "500": 0}
@@ -35,4 +38,3 @@ def main():
 if __name__ == "__main__":
 
     main()
-
