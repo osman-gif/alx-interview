@@ -1,4 +1,4 @@
-#!/urs/bin/env python3
+#!/urs/bin/python3
 
 def rotate_2d_matrix(matrix):
     """
