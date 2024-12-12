@@ -1,4 +1,14 @@
+#!/usr/bin/python3
+"""
+game of prime numbers
+"""
+
+
 def isWinner(x, nums):
+    """
+    Determine the winner of the game
+    """
+
     if x == 0 or not nums:
         return None
 
