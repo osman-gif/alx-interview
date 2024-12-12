@@ -1,29 +1,38 @@
-#!/usr/bin/python3
-"""
-This is a prime game module
-"""
-
-
 def isWinner(x, nums):
-    """
-    This function returns the name of the player that won the most rounds
-    """
+    if x == 0 or not nums:
+        return None
 
-    def is_prime(n):
+    max_n = max(nums)
+    sieve = [True] * (max_n + 1)
+    sieve[0:2] = [False, False]
+    for i in range(2, int(max_n**0.5) + 1):
+        if sieve[i]:
+            for multiple in range(i*i, max_n + 1, i):
+                sieve[multiple] = False
+
+    prime_counts = [0] * (max_n + 1)
+    count = 0
+    for i in range(1, max_n + 1):
+        if sieve[i]:
+            count += 1
+        prime_counts[i] = count
+
+    maria_wins = 0
+    ben_wins = 0
+
+    for n in nums[:x]:
         if n < 2:
-            return False
-        for i in range(2, int(n ** 0.5) + 1):
-            if n % i == 0:
-                return False
-        return True
+            ben_wins += 1
+            continue
+        primes = prime_counts[n]
+        if primes % 2 == 1:
+            maria_wins += 1
+        else:
+            ben_wins += 1
 
-    def count_primes(n):
-        count = 0
-        for i in range(1, n + 1):
-            if is_prime(i):
-                count += 1
-        return count
-
-    if sum(map(count_primes, nums)) % 2 == 0:
+    if maria_wins > ben_wins:
+        return "Maria"
+    elif ben_wins > maria_wins:
         return "Ben"
-    return "Maria"
+    else:
+        return None
